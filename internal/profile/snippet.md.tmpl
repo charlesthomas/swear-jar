@@ -1,0 +1,9 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./{{.Dark}}">
+  <source media="(prefers-color-scheme: light)" srcset="./{{.Light}}">
+  <img alt="Swear Jar: {{.Heading}}" src="./{{.Light}}">
+</picture>
+
+{{range $i, $s := .Stats}}{{if $i}} · {{end}}**{{$s.Value}}** {{$s.Label}}{{end}}
+
+Rendered with [swear-jar]({{.RepoURL}}).
