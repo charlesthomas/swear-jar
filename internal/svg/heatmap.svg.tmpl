@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="{{.Width}}" height="{{.Height}}" viewBox="0 0 {{.Width}} {{.Height}}" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect x="0.5" y="0.5" width="{{sub .Width 1}}" height="{{sub .Height 1}}" rx="6" fill="{{.Theme.Bg}}" stroke="{{.Theme.Border}}"/>
+{{.Logo}}
+<text x="{{.HeadX}}" y="{{.HeadY}}" font-size="14" font-weight="600" fill="{{.Theme.Fg}}">{{html .Heading}}</text>
+<text x="{{.Right}}" y="{{.HeadY}}" font-size="12" text-anchor="end" fill="{{.Theme.Muted}}">{{html .Counts}}</text>
+<g font-size="10" fill="{{.Theme.Muted}}">
+{{- range .Labels}}
+<text x="{{.X}}" y="{{.Y}}">{{html .Text}}</text>
+{{- end}}
+</g>
+<g stroke="#1b1f24" stroke-opacity="0.06">
+{{- range .Cells}}
+<rect x="{{.X}}" y="{{.Y}}" width="11" height="11" rx="2" fill="{{.Fill}}"><title>{{html .Title}}</title></rect>
+{{- end}}
+</g>
+<g font-size="11" fill="{{.Theme.Muted}}">
+<text x="{{.LessX}}" y="{{.LegendTextY}}" text-anchor="end">Less</text>
+<text x="{{.Right}}" y="{{.LegendTextY}}" text-anchor="end">More</text>
+</g>
+<g stroke="#1b1f24" stroke-opacity="0.06">
+{{- range .Legend}}
+<rect x="{{.X}}" y="{{.Y}}" width="11" height="11" rx="2" fill="{{.Fill}}"/>
+{{- end}}
+</g>
+{{- range .Stats}}
+<rect x="{{.X}}" y="{{.Y}}" width="{{.W}}" height="{{.H}}" rx="6" fill="{{$.Theme.Panel}}" stroke="{{$.Theme.Border}}"/>
+<text x="{{.TextX}}" y="{{.ValueY}}" font-size="20" font-weight="600" fill="{{$.Theme.Fg}}">{{html .Value}}</text>
+<text font-size="11" fill="{{$.Theme.Muted}}">
+{{- range .Lines}}<tspan x="{{.X}}" y="{{.Y}}">{{html .Text}}</tspan>{{end -}}
+</text>
+{{- end}}
+<text x="{{.Left}}" y="{{.AttrY}}" font-size="11" fill="{{.Theme.Muted}}">Rendered with {{.RepoURL}}</text>
+</svg>

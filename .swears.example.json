@@ -1,0 +1,7 @@
+[
+  "bunny",
+  "red panda",
+  {"word": "chinchilla"},
+  {"word": "cat", "prefix": true, "suffix": false},
+  {"word": "otter", "suffix": false}
+]

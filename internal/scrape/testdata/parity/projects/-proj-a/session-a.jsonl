@@ -1,0 +1,15 @@
+{"type":"user","uuid":"a1","sessionId":"s1","timestamp":"2026-09-21T14:00:00.000Z","message":{"role":"user","content":"this is fucking broken, what the hell"}}
+{"type":"assistant","uuid":"a2","sessionId":"s1","timestamp":"2026-09-21T14:00:05.000Z","message":{"role":"assistant","content":[{"type":"text","text":"shit, sorry"}]}}
+{"type":"user","isMeta":true,"uuid":"a3","sessionId":"s1","timestamp":"2026-09-21T14:01:00.000Z","message":{"role":"user","content":"damn meta"}}
+{"type":"user","isSidechain":true,"uuid":"a4","sessionId":"s1","timestamp":"2026-09-21T14:02:00.000Z","message":{"role":"user","content":"crap sidechain"}}
+{"type":"user","uuid":"a5","sessionId":"s1","timestamp":"2026-09-22T03:30:00.000Z","message":{"role":"user","content":[{"type":"text","text":"wtf is this crap"},{"type":"tool_result","tool_use_id":"t1","content":"shit happens"},{"type":"text","text":"ffs"}]}}
+{"type":"user","uuid":"a6","sessionId":"s1","timestamp":"2026-09-22T04:30:00.000Z","message":{"role":"user","content":"<system-reminder>damn damn</system-reminder>please fix the bullshit"}}
+{"type":"user","uuid":"a7","sessionId":"s1","timestamp":"2026-09-22T15:00:00.000Z","message":{"role":"user","content":"<command-name>/clear</command-name><command-message>clear the goddamn cache</command-message> this motherfucking thing"}}
+{"type":"user","uuid":"a8","sessionId":"s1","message":{"role":"user","content":"shit with no timestamp"}}
+{not json
+
+{"type":"user","uuid":"a9","sessionId":"s1","timestamp":"2026-09-22T16:00:00.000Z","message":{"role":"user","content":"   "}}
+{"type":"user","uuid":"a10","timestamp":"2026-09-23T12:00:00.000Z","message":{"role":"user","content":"<pasted_content id=\"x\">fuck fuck</pasted_content>Jesus Christ, that's bloody gaslighting"}}
+{"type":"user","uuid":"a11","sessionId":"s1","timestamp":"2026-09-23T13:00:00.000Z","message":{"role":"user","content":"<system-reminder>no close tag, damn. Hell, hello, assessment, ass."}}
+{"type":"user","sessionId":"s1","timestamp":"2026-09-24T12:00:00.000Z","message":{"role":"user","content":"dick move"}}
+{"type":"user","sessionId":"s1","timestamp":"2026-09-24T13:00:00.000Z","message":{"role":"user","content":"piss off"}}

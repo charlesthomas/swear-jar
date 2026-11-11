@@ -1,0 +1,10 @@
+Wrote:
+  {{.Light}}
+  {{.Dark}}
+  {{.Snippet}}
+
+To show the heatmap on your GitHub profile:
+  1. Open (or create) the public repository named after your GitHub username, github.com/USERNAME/USERNAME. Its README.md is your profile README.
+  2. Copy {{.Light}} and {{.Dark}} into the root of that repository.
+  3. Paste the contents of {{.Snippet}} into the repository's README.md, or rename it to README.md if the repository doesn't have one yet.
+  4. Commit and push. To update the heatmap later, rerun swear-jar with the same flags, copy the SVG files over again, and push.

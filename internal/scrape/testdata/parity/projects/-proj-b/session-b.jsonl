@@ -1,0 +1,3 @@
+{"type":"user","uuid":"a1","sessionId":"s2","timestamp":"2026-09-25T11:00:00.000Z","message":{"role":"user","content":"STFU duplicate"}}
+{"type":"user","uuid":"b1","sessionId":"s2","timestamp":"2026-09-25T12:00:00.000Z","message":{"role":"user","content":"STFU, omfg. Bitches and bastards"}}
+{"type":"user","uuid":"b2","sessionId":"s2","timestamp":"2026-09-25T12:05:00.000Z","message":{"role":"user","content":"<local-command-stdout>fuck</local-command-stdout>clean"}}

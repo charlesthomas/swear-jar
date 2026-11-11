@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swear Jar</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #656d76; --border: #d0d7de; --panel: #f6f8fa;
+    --l0: #ebedf0; --l1: #ffc9c9; --l2: #ff8787; --l3: #e03131; --l4: #8b0000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117; --fg: #e6edf3; --muted: #8d96a0; --border: #30363d; --panel: #161b22;
+      --l0: #161b22; --l1: #4a1416; --l2: #8f1d22; --l3: #d6333a; --l4: #ff6b6b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width: 960px; margin: 48px auto; padding: 0 16px; }
+  header { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; }
+  header svg { flex: none; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0; }
+  .card { position: relative; border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+  .head strong { font-size: 16px; }
+  .scroll { overflow-x: auto; }
+  .grid { display: grid; grid-template-columns: 28px repeat(var(--weeks), 11px); grid-template-rows: 15px repeat(7, 11px); gap: 3px; font-size: 10px; color: var(--muted); width: max-content; }
+  .cell { width: 11px; height: 11px; border-radius: 2px; background: var(--l0); outline: 1px solid rgba(27,31,36,.06); outline-offset: -1px; }
+  .cell[data-l="1"] { background: var(--l1); } .cell[data-l="2"] { background: var(--l2); }
+  .cell[data-l="3"] { background: var(--l3); } .cell[data-l="4"] { background: var(--l4); }
+  .cell:hover { outline: 1px solid var(--fg); }
+  .mlabel { white-space: nowrap; line-height: 15px; }
+  .dlabel { line-height: 11px; }
+  .legend { display: flex; justify-content: flex-end; align-items: center; gap: 3px; margin-top: 8px; min-height: 36px; font-size: 11px; color: var(--muted); }
+  .legend .cell { display: inline-block; }
+  .legend span:first-child { margin-right: 4px; } .legend span:last-child { margin-left: 4px; }
+  .tip { display: none; position: absolute; left: 16px; bottom: 14px; max-width: calc(100% - 200px); font-size: 12px; color: var(--fg); }
+  .cell:hover .tip { display: block; }
+  .tip .w { color: var(--l3); }
+  .tip .w:not(:empty)::before { content: " · "; color: var(--muted); }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+  .stat b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+  .stat small { color: var(--muted); }
+  h2 { font-size: 15px; margin: 28px 0 8px; }
+  .bars { display: grid; grid-template-columns: max-content 1fr max-content; gap: 6px 10px; align-items: center; }
+  .bar { height: 10px; background: var(--l3); border-radius: 2px; }
+  .num { color: var(--muted); font-variant-numeric: tabular-nums; }
+  footer { color: var(--muted); font-size: 12px; margin-top: 28px; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <header>{{logo}}<div><h1>Swear Jar</h1><p class="sub">From Claude Code transcripts, by day.</p></div></header>
+  <div class="card">
+    <div class="head"><strong>{{plural .Total "swear"}} in the last year</strong><span class="num">{{.Sessions}} sessions · {{.Files}} transcripts</span></div>
+    <div class="scroll"><div class="grid" style="--weeks: {{.Weeks}}">
+{{- range .DayLabels}}
+<div class="{{.Class}}" style="grid-column: {{.Col}}; grid-row: {{.Row}}">{{.Text}}</div>
+{{- end}}
+{{- range .MonthLabels}}
+<div class="{{.Class}}" style="grid-column: {{.Col}}; grid-row: {{.Row}}">{{.Text}}</div>
+{{- end}}
+{{- range .Cells}}
+<div class="cell" data-l="{{.Level}}" style="grid-column: {{.Col}}; grid-row: {{.Row}}"><span class="tip"><b>{{count .N}}</b> on {{longDate .Date}} · {{plural .Msgs "message"}} sent{{if $.ShowWords}}<span class="w">{{words .Words}}</span>{{end}}</span></div>
+{{- end}}
+    </div></div>
+    <div class="legend"><span>Less</span><i class="cell" data-l="0"></i><i class="cell" data-l="1"></i><i class="cell" data-l="2"></i><i class="cell" data-l="3"></i><i class="cell" data-l="4"></i><span>More</span></div>
+  </div>
+  <div class="stats">
+{{- range .Stats}}
+<div class="stat"><b>{{.Value}}</b><small>{{.Label}}</small></div>
+{{- end}}
+  </div>
+{{- if .ShowWords}}
+  <h2>Vocabulary</h2>
+  <div class="bars">
+{{- range .Vocab}}
+<span>{{.Word}}</span><div class="bar" style="width: {{printf "%.1f" .Pct}}%"></div><span class="num">{{.Count}}</span>
+{{- end}}
+  </div>
+{{- end}}
+  <footer>Generated {{.Generated.Format "2006-01-02"}} from ~/.claude transcripts. Counts only typed text. Tool output, pasted content, and system reminders excluded.<br>Rendered with <a href="{{repoURL}}">swear-jar</a>.</footer>
+</main>
+</body>
+</html>

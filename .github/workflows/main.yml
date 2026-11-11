@@ -1,0 +1,54 @@
+name: main
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - ".github/**"
+      - ".claude/**"
+      - "**.md"
+      - "LICENSE"
+      - ".gitignore"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - run: go vet ./...
+
+      - run: go test ./...
+
+      - uses: goreleaser/goreleaser-action@v6
+        with:
+          version: "~> v2"
+          args: check
+
+      - name: Tag
+        run: |
+          GOTOOLCHAIN=auto go install github.com/caarlos0/svu/v3@v3.4.4
+          tag="$(svu next --always)"
+          git tag "$tag"
+          git push origin "$tag"
+
+      - uses: goreleaser/goreleaser-action@v6
+        with:
+          version: "~> v2"
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,23 @@
+[
+  {"pattern": "fuck\\w*", "word": "fuck", "censored": "f*ck"},
+  {"pattern": "shit\\w*", "word": "shit", "censored": "sh*t"},
+  {"pattern": "bullshit", "word": "bullshit", "censored": "bullsh*t"},
+  {"pattern": "damn\\w*", "word": "damn", "censored": "d*mn"},
+  {"pattern": "goddamn\\w*", "word": "goddamn", "censored": "godd*mn"},
+  {"pattern": "hell", "word": "hell", "censored": "h*ll"},
+  {"pattern": "bitch\\w*", "word": "bitch", "censored": "b*tch"},
+  {"pattern": "bastard\\w*", "word": "bastard", "censored": "b*stard"},
+  {"pattern": "asshole\\w*", "word": "asshole", "censored": "*sshole"},
+  {"pattern": "ass", "word": "ass", "censored": "*ss"},
+  {"pattern": "crap\\w*", "word": "crap", "censored": "cr*p"},
+  {"pattern": "piss\\w*", "word": "piss", "censored": "p*ss"},
+  {"pattern": "dick\\w*", "word": "dick", "censored": "d*ck"},
+  {"pattern": "wtf", "censor": false},
+  {"pattern": "ffs", "censor": false},
+  {"pattern": "stfu", "censor": false},
+  {"pattern": "omfg", "censor": false},
+  {"pattern": "bloody", "word": "bloody", "censored": "bl*ody"},
+  {"pattern": "motherfuck\\w*", "word": "motherfuck", "censored": "motherf*ck"},
+  {"pattern": "jesus christ", "word": "jesus christ", "censor": false},
+  {"pattern": "gaslight\\w*", "censor": false}
+]
